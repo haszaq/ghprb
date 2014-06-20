@@ -39,7 +39,15 @@ public class GhprbBuilds {
             sb.append(" Build triggered.");
         }
 
-        GhprbCause cause = new GhprbCause(pr.getHead(), pr.getId(), pr.isMergeable(), pr.getTarget(), pr.getSource(), pr.getAuthorEmail(), pr.getTitle(), pr.getUrl());
+        String prAuthorName = null;
+        try {
+            prAuthorName = pr.getAuthor().getName();
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+        GhprbCause cause = new GhprbCause(pr.getHead(), pr.getId(), pr.isMergeable(), pr.getTarget(), pr.getSource(), pr.getAuthorEmail(), prAuthorName, pr.getTitle(), pr.getUrl());
 
         QueueTaskFuture<?> build = trigger.startJob(cause, repo);
         if (build == null) {

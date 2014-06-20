@@ -313,6 +313,10 @@ public class GhprbPullRequest {
         return title;
     }
 
+    public GHUser getAuthor() {
+        return author;
+    }
+
     /**
      * Returns the URL to the Github Pull Request.
      *
